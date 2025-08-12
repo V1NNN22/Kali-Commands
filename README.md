@@ -27,7 +27,7 @@ This repository serves as a quick reference guide for both beginners and interme
 ---
 
 ##  How to Use
-- Click any topic above to open its dedicated `.md` file with commands and examples.
+- Open any of above Topics files and Start learning. 
 - Each topic contains:
   - Command usage & syntax
   - Common flags
