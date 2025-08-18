@@ -6,27 +6,27 @@
 
 ---
 
-## 📚 Table of Contents
-- [📁 Linux File System Basics](#-linux-file-system-basics)
-- [🛡️ Permissions & Users](#️-permissions--users)
-- [⚙️ Processes & System Info](#️-processes--system-info)
-- [🌐 Networking Basics in Linux](#-networking-basics-in-linux)
-- [🚀 Power Tools (Search, Automation, Transfers, Security)](#-power-tools-search-automation-transfers-security)
-- [🧩 Handy Snippets](#-handy-snippets)
-- [✅ Practice Checklist](#-practice-checklist)
+##  Table of Contents
+- [ Linux File System Basics](#-linux-file-system-basics)
+- [ Permissions & Users](#️-permissions--users)
+- [ Processes & System Info](#️-processes--system-info)
+- [ Networking Basics in Linux](#-networking-basics-in-linux)
+- [ Power Tools (Search, Automation, Transfers, Security)](#-power-tools-search-automation-transfers-security)
+- [ Handy Snippets](#-handy-snippets)
+- [ Practice Checklist](#-practice-checklist)
 
 ---
 
-## 📁 Linux File System Basics
+##  Linux File System Basics
 
-### 🗂️ The Directory Map (know these)
+###  The Directory Map (know these)
 - `/` root of everything  
 - `/home/USER` your files  
 - `/etc` configs, `/var` variable data/logs, `/tmp` temporary  
 - `/bin` & `/usr/bin` user commands, `/sbin` system commands  
 - `/dev` devices, `/proc` running-kernel info (virtual), `/opt` optional apps
 
-### 🧭 Navigate & List
+###  Navigate & List
 ```bash
 pwd                          # where am I?
 ls                           # list names
@@ -38,7 +38,7 @@ cd ..                        # up one level
 cd ~                         # home
 ```
 
-### 📝 Create, Copy, Move, Delete
+###  Create, Copy, Move, Delete
 ```bash
 mkdir DIR                    # make folder
 mkdir -p PATH/TO/DIR         # make nested folders
@@ -50,11 +50,11 @@ mv SRC DEST                  # move/rename
 rm FILE                      # remove file
 rm -i FILE                   # ask before delete
 rm -r DIR                    # remove folder recursively
-rm -rf DIR                   # ⚠️ force recursive delete (danger!)
+rm -rf DIR                   # ! force recursive delete (danger!)
 rmdir EMPTYDIR               # remove empty folder
 ```
 
-### 🔎 Inspect & Measure
+###  Inspect & Measure
 ```bash
 file FILE                    # detect file type
 stat FILE                    # full metadata (size, perms, times)
@@ -63,13 +63,13 @@ du -sh *                     # sizes of items (disk usage, human)
 df -h                        # free space by filesystem
 ```
 
-### 🔗 Links (Shortcuts)
+###  Links (Shortcuts)
 ```bash
 ln SRC HARDLINK              # hard link (same inode)
 ln -s TARGET LINKNAME        # symbolic link (pointer)
 ```
 
-### 🔍 Find Files Fast
+###  Find Files Fast
 ```bash
 find PATH -name "*.log"                  # by name (glob)
 find PATH -type f -size +100M            # large files
@@ -80,7 +80,7 @@ find PATH -type f -exec grep -nH "text" {} \;  # search inside
 ```
 > Tip: `locate NAME` is faster (uses a database). Update DB with `sudo updatedb` first on some distros.
 
-### 📖 View File Contents
+###  View File Contents
 ```bash
 cat FILE                      # print all
 nl FILE                       # print with line numbers
@@ -92,19 +92,19 @@ tail -f LOGFILE               # follow live updates
 
 ---
 
-## 🛡️ Permissions & Users
+##  Permissions & Users
 
-### 🔤 Read the `ls -l` Output
+###  Read the `ls -l` Output
 Example: `-rw-r--r-- 1 USER GROUP 12K Jan 1 12:00 notes.txt`  
 - Positions: `d`=directory, `-`=file, `l`=symlink  
 - Then `rwx` for **owner**, **group**, **others**.
 
-### #️⃣ Octal Cheatsheet
+### #️ Octal Cheatsheet
 - `r=4`, `w=2`, `x=1` → add them:
   - `7` = `rwx`, `6` = `rw-`, `5` = `r-x`, `4` = `r--`, `0` = `---`
 - Common: `644` (files), `755` (dirs/executables)
 
-### 🛠️ Change Permissions & Ownership
+###  Change Permissions & Ownership
 ```bash
 chmod 644 FILE                # octal
 chmod u+x SCRIPT.sh           # symbolic (add exec to owner)
@@ -115,7 +115,7 @@ chown USER:GROUP FILE         # change owner & group
 chgrp GROUP FILE              # change group
 ```
 
-### 👥 Users & Groups
+###  Users & Groups
 ```bash
 whoami                        # current user
 id                            # uid/gid and groups
@@ -134,12 +134,12 @@ sudo -l                        # what can I run?
 su - USER                      # switch user (login shell)
 ```
 
-### 🧷 Special Bits (Just Know)
+###  Special Bits (Just Know)
 - **Sticky** (`+t`) on shared dirs (e.g., `/tmp`): only owner can delete their files.  
   `sudo chmod +t /shared`
 - **setuid/setgid**: run with owner/group privileges (advanced, use carefully).
 
-### 🎯 Default Mask
+###  Default Mask
 ```bash
 umask           # show default (e.g., 0022)
 umask 0022      # set: new files get (666-022)=644, dirs (777-022)=755
@@ -147,9 +147,9 @@ umask 0022      # set: new files get (666-022)=644, dirs (777-022)=755
 
 ---
 
-## ⚙️ Processes & System Info
+##  Processes & System Info
 
-### 🔭 See What’s Running
+###  See What’s Running
 ```bash
 ps aux | less                     # all processes
 pgrep -fl NAME                    # find PIDs by name
@@ -158,7 +158,7 @@ htop                              # nicer top (install first)
 watch -n1 'free -h'               # rerun every second
 ```
 
-### 🧹 Control Processes
+###  Control Processes
 ```bash
 kill PID                          # polite stop (SIGTERM)
 kill -9 PID                       # force kill (SIGKILL)
@@ -169,7 +169,7 @@ nice -n 10 CMD                    # start with lower priority
 renice 5 -p PID                   # change priority of running process
 ```
 
-### 📊 Resource & Hardware
+###  Resource & Hardware
 ```bash
 free -h                           # memory
 df -h                             # disk space
@@ -181,7 +181,7 @@ lscpu                             # CPU details
 lsblk -f                          # disks/partitions
 ```
 
-### 🧩 Services & Logs (systemd)
+###  Services & Logs (systemd)
 ```bash
 systemctl status SERVICE          # service status
 sudo systemctl start|stop SERVICE # control
@@ -192,7 +192,7 @@ journalctl -xe                     # last errors with context
 dmesg -T                           # kernel messages (with time)
 ```
 
-### 🔓 Open Files & Ports
+###  Open Files & Ports
 ```bash
 lsof -p PID                       # files opened by a process
 sudo lsof -i -P -n                # all network sockets
@@ -201,9 +201,9 @@ ss -tulpen                        # listening ports & owners
 
 ---
 
-## 🌐 Networking Basics in Linux
+##  Networking Basics in Linux
 
-### 🛣️ Interfaces & Routes
+###  Interfaces & Routes
 ```bash
 ip a                              # addresses
 ip r                              # routes
@@ -211,7 +211,7 @@ ip link set IFACE up|down         # bring interface up/down
 sudo ip addr add 192.168.1.50/24 dev IFACE   # add IP
 ```
 
-### 🧪 Connectivity Tests
+###  Connectivity Tests
 ```bash
 ping -c 4 HOST                    # reachability + latency
 traceroute HOST                   # path (install may be required)
@@ -222,7 +222,7 @@ curl -I https://example.com       # HTTP headers (quick check)
 wget URL                          # download file
 ```
 
-### 🔭 Ports & Services
+###  Ports & Services
 ```bash
 ss -tulpn                         # show listening ports
 nc -vz HOST PORT                  # test TCP connect
@@ -236,9 +236,9 @@ nc HOST 9000 < FILE
 
 ---
 
-## 🚀 Power Tools (Search, Automation, Transfers, Security)
+##  Power Tools (Search, Automation, Transfers, Security)
 
-### 🔍 Text Search & Filters
+###  Text Search & Filters
 ```bash
 grep -RIn --color "PATTERN" PATH        # recursive, line numbers
 grep -E "regex1|regex2" FILE            # extended regex
@@ -256,7 +256,7 @@ tr -d '\r' < FILE > CLEAN                # remove CR
 sort FILE | uniq -c | sort -nr           # frequency count
 ```
 
-### 🔗 Pipelines & `xargs`
+###  Pipelines & `xargs`
 ```bash
 # Send output into multiple places
 somecmd | tee out.log
@@ -265,7 +265,7 @@ somecmd | tee out.log
 find PATH -type f -print0 | xargs -0 grep -n "TEXT"
 ```
 
-### 📦 Archives & Compression
+###  Archives & Compression
 ```bash
 # tarball create/extract
 tar -czvf archive.tgz DIR               # create (.tgz)
@@ -275,17 +275,17 @@ zip -r archive.zip DIR                  # zip dir
 unzip archive.zip                       # unzip
 ```
 
-### 🔐 SSH & File Transfer
+###  SSH & File Transfer
 ```bash
 ssh USER@HOST                           # remote shell
 scp FILE USER@HOST:/PATH/               # copy to remote
 scp -r DIR USER@HOST:/PATH/             # copy folder
 rsync -avh --progress SRC/ DEST/        # local sync
 rsync -avh --progress SRC/ USER@HOST:/DEST/   # to remote
-rsync -avh --delete SRC/ DEST/          # mirror (⚠️ deletes extras)
+rsync -avh --delete SRC/ DEST/          # mirror (! deletes extras)
 ```
 
-### ⏰ Schedule Jobs
+###  Schedule Jobs
 ```bash
 crontab -e                               # edit user cron
 # ┌ min (0-59)
@@ -299,16 +299,16 @@ crontab -e                               # edit user cron
 30 2 * * * /home/USER/bin/backup.sh >> /var/log/backup.log 2>&1
 ```
 
-### 🛰️ Security / Diagnostics (Ethical Use Only)
+###  Security / Diagnostics (Ethical Use Only)
 ```bash
 nmap -sV -Pn TARGET                    # discover services & versions
 sudo tcpdump -i IFACE 'port 80' -c 50  # capture a few packets (Ctrl+C to stop)
 ```
-> Use only on systems you own or are authorized to test. ✅
+> Use only on systems you own or are authorized to test. 
 
 ---
 
-## 🧩 Handy Snippets
+##  Handy Snippets
 
 ```bash
 # 1) Find biggest things in current folder (top 20)
