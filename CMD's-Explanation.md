@@ -329,34 +329,6 @@ systemctl --failed
 # 6) Quickly serve current directory over HTTP (Python 3)
 python3 -m http.server 8000
 ```
-
----
-
-## ✅ Practice Checklist
-
-- [ ] Navigate to your home and list all files (including hidden)  
-  `cd ~ && ls -la`  
-- [ ] Create `playground/notes`, make a file, and symlink it to `note`  
-  ```bash
-  mkdir -p playground/notes
-  echo "hello" > playground/notes/one.txt
-  ln -s playground/notes/one.txt note
-  ```
-- [ ] Set permissions: folder `755`, file `644`  
-  `chmod 755 playground/notes && chmod 644 playground/notes/one.txt`  
-- [ ] Find files modified today under `playground`  
-  `find playground -type f -mtime -1 -print`  
-- [ ] Watch memory usage live for 5 seconds  
-  `watch -n1 -d 'free -h'` (press `Ctrl+C` when done)  
-- [ ] Check listening ports  
-  `ss -tulpen`  
-- [ ] Compress `playground` into `playground.tgz` and extract it  
-  `tar -czvf playground.tgz playground && tar -xzvf playground.tgz`  
-- [ ] Copy a file to a remote host (replace placeholders)  
-  `scp FILE USER@HOST:/PATH/`  
-- [ ] Add a cron job to echo time every minute (then remove it)  
-  `crontab -e` → `* * * * * date >> ~/minute.log`  
-
 ---
 # THANK YOU!
 #  ~ **V1NNN22** ~
